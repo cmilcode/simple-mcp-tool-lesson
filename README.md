@@ -8,10 +8,10 @@ The below instructions are current as of March 2026, and were tested on a Lubunt
 ## Environment Setup
 1. Install ollama in one of two ways:
 	1. For the install script that does *a lot* of extra random stuff like create a service, jetpack stuff, CUDA stuff, and more that I didn't care about for this lesson, run the install script with `curl -fsSL https://ollama.com/install.sh | sh`
-	2. For a simple manual install, run `curl -fsSL https://ollama.com/download/ollama-linux-amd64.tar.zst \ | sudo tar x -C /usr` then just use `ollama serve` when you want to run ollama. This will eat the terminal, so run it in it's own tab.
+	2. For a simple manual install, run `curl -fsSL https://ollama.com/download/ollama-linux-amd64.tar.zst \ | sudo tar x --zstd -C /usr` then just use `ollama serve` when you want to run ollama. This will eat the terminal, so run it in it's own tab.
 	3. Test that ollama is successfully running with `ollama -v` in a new tab.
-2. Pull down a model you would like to use, that can run tools. For this walkthrough, we will use mistral-3. Why? I like croissants.
-	1. `ollama pull mistral-3`
+2. Pull down a model you would like to use, that can run tools. For this walkthrough, we will use ministral-3. Why? I like croissants.
+	1. `ollama pull ministral-3`
 3. Set up your python environment.
 	1. Install python venv if you don't already have it with `sudo apt install python3.12-venv`
 	2. Create a virtual environment with `python3 -m venv mcp_env`
