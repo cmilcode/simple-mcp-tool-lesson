@@ -13,7 +13,7 @@ import asyncio
 import ollama
 from fastmcp import Client
 
-# Define our client using the default of localhost:8050, using SSE for transport.
+# Define our client using the default of localhost:8050, using HTTP for transport.
 client = Client("http://localhost:8050/mcp")
 
 # This implementation heavily leans on kirillsaidov's ollama mcp example with the ollama function translation.
@@ -30,22 +30,18 @@ async def main(model: str) -> str:
         }]
 
         # Get a list of all the tools available to the client.
-        # We use await to delay until the client populates its list.
         # These are the tools that we set up in the mcp_server.py script.
         mcp_tools = await client.list_tools()
         ollama_tools = []
 
-        # Tell the user what tools are available. This would be better as a /tools type thing
+        # Tell the user what tools are available.
         print('Available tools:')
         list_tools(mcp_tools)
-        #for tool in mcp_tools:
-        #    print(f'\t- {tool.name}')
-        #    print(f'\t  {tool.description.split("\n")[0]}')
 
         # Convert MCP tools to the Ollama format.
         # That means this script only works with Ollama.
         # You need to write your own connector if you are using something else.
-        # But remember, this is for the CLIENT. The SERVER is universal for all MCP clients.
+        # But remember, this is for the CLIENT. The SERVER is universal for all clients that adhere to the MCP protocol.
         for tool in mcp_tools:
             ollama_tools.append({
                 'type': 'function',
@@ -115,8 +111,3 @@ def list_tools(tool_list: list) -> list:
 
 if __name__ == "__main__":
     asyncio.run(main(model='ministral-3:latest'))
-
-
-
-
-
